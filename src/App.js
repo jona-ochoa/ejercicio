@@ -1,22 +1,18 @@
-import logo from './logo.svg';
 import './App.css';
+import Contact from './example/contact';
+import { Linea } from './example/linea';
+// import TaskListComponent from './components/container/task_list';
+
 
 function App() {
+  const defaultLinea = new Linea("Jonatan","Ochoa", "jona00ochoa@gmail.com", true);
   return (
     <div className="App">
       <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
+        <div>
+          {/* <TaskListComponent /> */}
+          <Contact linea={defaultLinea} />
+        </div>
       </header>
     </div>
   );
