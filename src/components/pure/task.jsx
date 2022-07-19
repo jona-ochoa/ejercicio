@@ -4,7 +4,7 @@ import { Task } from "../../models/task.class";
 import "../../styles/task.scss";
 import { LEVELS } from "../../models/levels.enum";
 
-const TaskComponent = ({ task }) => {
+const TaskComponent = ({ task, complete }) => {
   useEffect(() => {
     console.log("Tarea Creada");
     return () => {
@@ -39,9 +39,21 @@ const TaskComponent = ({ task }) => {
 
   function taskCompletedIcon() {
     if (task.completed) {
-      return (<i className="bi bi-toggle-on" style={{ color: "green", fontSize: "25px" }}></i>);
+      return (
+        <i
+          onClick={() => complete(task)}
+          className="bi bi-toggle-on task-action"
+          style={{ color: "green", fontSize: "25px" }}
+        ></i>
+      );
     } else {
-      return (<i className="bi bi-toggle-off" style={{ color: "tomato", fontSize: "25px" }} ></i>);
+      return (
+        <i
+          onClick={() => complete(task)}
+          className="bi bi-toggle-off task-action"
+          style={{ color: "tomato", fontSize: "25px" }}
+        ></i>
+      );
     }
   }
 
@@ -56,14 +68,18 @@ const TaskComponent = ({ task }) => {
       <td className="align-middle">{taskLevelBadge()}</td>
       <td className="align-middle">
         {taskCompletedIcon()}
-        <i className="bi bi-trash" style={{ color: "grey", fontSize: "25px" }}></i>
+        <i
+          className="bi bi-trash task-action"
+          style={{ color: "grey", fontSize: "25px" }}
+        ></i>
       </td>
     </tr>
   );
 };
 
 TaskComponent.propTypes = {
-  task: PropTypes.instanceOf(Task),
+  task: PropTypes.instanceOf(Task).isRequired,
+  complete: PropTypes.func.isRequired,
 };
 
 export default TaskComponent;

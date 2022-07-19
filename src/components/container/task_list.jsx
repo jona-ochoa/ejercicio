@@ -25,7 +25,11 @@ const TaskListComponent = () => {
     LEVELS.BLOCKING
   );
 
-  const [tasks, setTasks] = useState([defaultTask1, defaultTask2, defaultTask3]);
+  const [tasks, setTasks] = useState([
+    defaultTask1,
+    defaultTask2,
+    defaultTask3,
+  ]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
@@ -36,9 +40,13 @@ const TaskListComponent = () => {
     };
   }, [tasks]);
 
-  const changeCompleted = (id) => {
-    console.log("TODO: cambiar el estado de una tarea");
-  };
+  function completeTask(task) {
+    console.log(`Completed`, task);
+    const index = tasks.indexOf(task);
+    const tempTask = [...tasks];
+    tempTask[index].completed = !tempTask[index].completed;
+    setTasks(tempTask)
+  }
 
   return (
     <div>
@@ -64,13 +72,13 @@ const TaskListComponent = () => {
               <tbody>
                 {tasks.map((task, index) => {
                   return (
-                    <TaskComponent key={index} task={task}></TaskComponent>
+                    <TaskComponent key={index} task={task} complete={completeTask}></TaskComponent>
                   );
                 })}
               </tbody>
             </table>
           </div>
-          <TaskForm />
+          <TaskForm></TaskForm>
         </div>
       </div>
       {/* TODO aplicar un for/map para renderizar una lista */}
